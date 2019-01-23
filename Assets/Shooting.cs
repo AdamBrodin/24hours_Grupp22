@@ -1,17 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
+    public Gun gun;
     public GameObject Bullet;
     [Space]
-    public float bulletspeed;
-    public float firerate;
-    private float nextfire;
+    public Transform firepoint;
+    [Space]
+    public float nexshoot;
 
     private void FixedUpdate()
     {
+        nexshoot -= Time.deltaTime;
         FaceMouse();
         shooting();
     }
@@ -27,11 +30,20 @@ public class Shooting : MonoBehaviour
 
     void shooting()
     {
-        if (Input.GetButton("Fire1") && Time.time > nextfire)
+        if (Input.GetButton("Fire1") && nexshoot <= 0)
         {
-            nextfire = Time.time + firerate;
-            GameObject projectile = Instantiate(Bullet, transform.position, transform.rotation) as GameObject;
-            projectile.GetComponent<Rigidbody2D>().velocity = projectile.transform.up * bulletspeed;
+
+            CamerShake camra = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CamerShake>();
+            camra.DoCameraShake(gun.shakeduration);
+            nexshoot = 1 / gun.firerate;
+            GameObject projectile = Instantiate(Bullet, firepoint.position, transform.rotation) as GameObject;
+            Bullet bulscrip = projectile.GetComponent<Bullet>();
+            bulscrip.setrotation(gun.spread);
+            projectile.GetComponent<Rigidbody2D>().velocity = projectile.transform.up * gun.bulletspeed;
+            Destroy(projectile, gun.lifetime);
+
+            transform.position -= transform.up   * gun.knockback;
         }
     }
+
 }
