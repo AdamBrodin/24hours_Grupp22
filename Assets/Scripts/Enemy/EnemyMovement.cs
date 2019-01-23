@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
     public GameObject player; // Player object to follow
 
     private float distanceToPlayer; // Distance from enemy to player
-    public float triggerDistance = 5f, timeToWalk = 5f; // triggerDistance = max distance for movement to begin, time to walk = speed
+    public float triggerDistance, timeToWalk; // triggerDistance = max distance for movement to begin, time to walk = speed
 
     private Vector2 currentVelocity = Vector2.zero;
 
