@@ -6,7 +6,7 @@ public class CamerShake : MonoBehaviour
 {
     public int shakes = 3;
 
-    public void DoCameraShake(float shakeMagnitude)
+    public void DoCameraShake(float shakeMagnitude, int CameraShakes)
     {
         StartCoroutine(PlayCameraShake(shakeMagnitude));
     }

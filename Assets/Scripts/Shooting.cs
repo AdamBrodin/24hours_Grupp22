@@ -34,11 +34,11 @@ public class Shooting : MonoBehaviour
         {
 
             CamerShake camra = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CamerShake>();
-            camra.DoCameraShake(gun.shakeduration);
             nexshoot = 1 / gun.firerate;
             GameObject projectile = Instantiate(Bullet, firepoint.position, transform.rotation) as GameObject;
             Bullet bulscrip = projectile.GetComponent<Bullet>();
             bulscrip.setrotation(gun.spread);
+            bulscrip.damage = gun.damage;
             projectile.GetComponent<Rigidbody2D>().velocity = projectile.transform.up * gun.bulletspeed;
             Destroy(projectile, gun.lifetime);
 
