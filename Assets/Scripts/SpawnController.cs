@@ -25,5 +25,7 @@ public class SpawnController : MonoBehaviour
         g.transform.position = spawnPos;
 
         StartCoroutine(SpawnEnemies());
+
+        //asdf
     }
 }
