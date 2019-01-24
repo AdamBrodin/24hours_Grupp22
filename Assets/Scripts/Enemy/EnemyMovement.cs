@@ -25,7 +25,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FollowPlayer()
     {
-        transform.LookAt(player.transform); // Point towards the player
+        //transform.right = player.transform.position - transform.position; // Point towards the player
 
         distanceToPlayer = Vector2.Distance(transform.position, player.transform.position); // Distance between enemy and player
 
